@@ -22,16 +22,6 @@ export default Button;
 
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    elevation: 8,
-    backgroundColor: "#336AEA",
-    paddingVertical: 14,
-    paddingHorizontal: 25,
-    marginHorizontal: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 7,
-  },
   button: {
     backgroundColor: "#336AEA",
     width: '100%',
