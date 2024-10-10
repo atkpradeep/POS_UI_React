@@ -1,29 +1,30 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Alert, ScrollView } from 'react-native';
-import axios from 'axios';
+import { TextInput, StyleSheet, Alert, ScrollView } from 'react-native';
 import ImageViewer from '@/src/common_components/ImageViewer';
 import Button from '@/src/common_components/CustomButton';
-import { ThemedText } from '@/src/components/ThemedText';
 import { ThemedView } from '@/src/components/ThemedView';
 import { useNavigation } from '@react-navigation/native';
+import { resetPassword } from '@/src/services/authService';
+import { RegisterScreenProps } from '@/src/types/AppNavigatorTypes';
 
 const PlaceholderImage = require('@/src/assets/images/reset_password.jpg');
 
 export default function ResetPasswordScreen() {
   const [email, setEmail] = useState('');
-  const navigation = useNavigation();
-
+  const navigation = useNavigation<RegisterScreenProps['navigation']>();
 
   const handlePasswordReset = async () => {
-     // Input validation
-     if (!email.trim()) {
+
+    // Input validation
+    if (!email.trim()) {
       alert('Email cannot be empty.');
       return;
     }
 
     try {
-      const response = await axios.post('https://jsonplaceholder.typicode.com/posts', { email });
-      if (response.status === 201) {
+      const resetPasswordData = { email };
+      const result = await resetPassword(resetPasswordData); // Call login API
+      if (result.status === 201) {
         Alert.alert('Password reset email sent!');
       }
     } catch (error) {
@@ -46,8 +47,8 @@ export default function ResetPasswordScreen() {
           />
         </ThemedView>
         <ThemedView style={styles.footerContainer}>
-          <Button title="Send Reset Email" label="Reset Password" onPress={handlePasswordReset} />
-          <Button icon="sign-in" label="Login" onPress={() => navigation.navigate('Login')} />
+          <Button icon="sign-in" label="Reset Password" onPress={handlePasswordReset} />
+          <Button icon="sign-in" label="Login" onPress={async () => navigation.navigate('Login')} />
         </ThemedView>
       </ThemedView>
     </ScrollView>

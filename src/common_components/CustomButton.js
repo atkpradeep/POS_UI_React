@@ -2,7 +2,13 @@ import React, { forwardRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-const Button = forwardRef(({ label, onPress, icon }, ref) => {
+interface ButtonProps {
+  label: string;
+  onPress: () => Promise<void>;
+  icon: string;
+}
+
+const Button: React.FC<ButtonProps> = ({ label, onPress, icon }) => {
   return (
     
       <TouchableOpacity
@@ -16,7 +22,7 @@ const Button = forwardRef(({ label, onPress, icon }, ref) => {
       </TouchableOpacity>
   
   );
-});
+};
 
 export default Button;
 

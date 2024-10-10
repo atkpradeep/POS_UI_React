@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Alert , ScrollView} from 'react-native';
-import axios from 'axios';
+import {TextInput, StyleSheet, Alert, ScrollView } from 'react-native';
 import ImageViewer from '@/src/common_components/ImageViewer';
 import Button from '@/src/common_components/CustomButton';
-import { ThemedText } from '@/src/components/ThemedText';
 import { ThemedView } from '@/src/components/ThemedView';
 import { useNavigation } from '@react-navigation/native';
+import { registerUser } from '@/src/services/authService';
+import { RegisterScreenProps } from '@/src/types/AppNavigatorTypes';
 
 const PlaceholderImage = require('@/src/assets/images/register.jpg');
 
 export default function RegisterScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RegisterScreenProps['navigation']>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -23,11 +23,9 @@ export default function RegisterScreen() {
     }
 
     try {
-      const response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
-        email,
-        password,
-      });
-      if (response.status === 201) {
+      const registerData = { email, password };
+      const result = await registerUser(registerData); // Call login API
+      if (result.status === 201) {
         Alert.alert('Registration successful!', 'You can now login.');
         navigation.navigate('Login');
       }
@@ -35,6 +33,7 @@ export default function RegisterScreen() {
       Alert.alert('Registration failed!', 'Please try again.');
     }
   };
+
 
   return (
     <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
@@ -58,8 +57,8 @@ export default function RegisterScreen() {
           />
         </ThemedView>
         <ThemedView style={styles.footerContainer}>
-          <Button title="Register" label="Register" onPress={handleRegister} />
-          <Button icon="sign-in" label="Login" onPress={() => navigation.navigate('Login')} />
+          <Button icon="sign-in" label="Register" onPress={handleRegister} />
+          <Button icon="sign-in" label="Login" onPress={async () => navigation.navigate('Login')} />
         </ThemedView>
       </ThemedView>
     </ScrollView>
