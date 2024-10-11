@@ -60,30 +60,28 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   imageContainer: {
-    height: '60%',
+    height: '40%',
     borderRadius: 10,
     overflow: 'hidden',
     borderWidth: 2,
     borderColor: '#ccc',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 2
+    paddingTop: 2,
   },
   inputContainer: {
-    height: '25%',
+    height: '30%',
     padding: 5
   },
   footerContainer: {
-    height: '15%',
-    padding: 15
+    height: '30%',
   },
   input: {
     borderWidth: 1,
     padding: 10,
-    height: 50,
-    backgroundColor: "#fff",
     marginBottom: 10,
-    paddingHorizontal: 10,
+    height: 55,
+    backgroundColor: "#fff"
   },
 });
 

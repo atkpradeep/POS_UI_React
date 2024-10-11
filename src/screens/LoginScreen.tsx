@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {Text, TextInput, StyleSheet, Alert, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ImageViewer from '@/src/common_components/ImageViewer';
@@ -17,6 +17,10 @@ export default function LoginScreen({ setUserToken }: { setUserToken: (token: st
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  useEffect(() => {
+    setErrorMessage(() => '');
+  }, [errorMessage]); 
+  
   const handleLogin = async () => {
     try {
       const loginData = { username, password };
@@ -51,12 +55,12 @@ export default function LoginScreen({ setUserToken }: { setUserToken: (token: st
             value={password}
             onChangeText={setPassword}
           />
+          {errorMessage ? <Text style={{ color: 'red'}}>{errorMessage}</Text> : null}
         </ThemedView>
         <ThemedView style={styles.footerContainer}>
           <Button label="Login" onPress={handleLogin} icon="sign-in" />
           <Button icon="users" label="Sign Up" onPress={async () => navigation.navigate('Register')} />
           <Button icon="times-circle-o" label="Forgot Password?" onPress={async () => navigation.navigate('ResetPassword')} />
-          {errorMessage ? <Text style={{ color: 'red' }}>{errorMessage}</Text> : null}
         </ThemedView>
       </ThemedView>
     </ScrollView>
@@ -68,7 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   imageContainer: {
-    height: '50%',
+    height: '40%',
     borderRadius: 10,
     overflow: 'hidden',
     borderWidth: 2,
@@ -78,19 +82,17 @@ const styles = StyleSheet.create({
     paddingTop: 2
   },
   inputContainer: {
-    height: '20%',
+    height: '30%',
     padding: 5
   },
   footerContainer: {
     height: '30%',
-    padding: 15,
-    flexBasis: 'auto'
   },
   input: {
     borderWidth: 1,
     padding: 10,
     marginBottom: 10,
-    height: 50,
+    height: 55,
     backgroundColor: "#fff"
   },
 });
