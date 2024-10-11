@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
