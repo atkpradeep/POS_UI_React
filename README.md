@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
@@ -52,4 +51,3 @@ Join our community of developers creating universal apps.
 =======
 # POS_UI_React
 React Native UI app for POS
->>>>>>> 7e33f8da7faad2afaeb9cb6ffdb76702d914892f
