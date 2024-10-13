@@ -20,6 +20,21 @@ export interface ResetPasswordData {
   email: string;
 }
 
+// Funtion to make tocket authentication
+async function makeAuthenticatedRequest(token) {
+  try {
+    const response = await axios.get(`${API_URL}/protected`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.log('API Response:', response.data);
+  } catch (error) {
+    throw new Error('API Error:', error.response ? error.response.data : error.message);
+  }
+}
+
 // Function to handle login
 export const loginUser = async (loginData: LoginData) => {
   try {

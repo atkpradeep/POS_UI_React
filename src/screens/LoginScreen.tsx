@@ -20,8 +20,13 @@ export default function LoginScreen({ setUserToken }: { setUserToken: (token: st
   useEffect(() => {
     setErrorMessage(() => '');
   }, [errorMessage]); 
-  
+
   const handleLogin = async () => {
+     // Input validation
+     if (!username.trim() || !password.trim()) {
+      alert('User name and password cannot be empty.');
+      return;
+    }
     try {
       const loginData = { username, password };
       const result = await loginUser(loginData); // Call login API
