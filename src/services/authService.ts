@@ -1,6 +1,7 @@
 // src/services/authService.ts
 
 import axios from 'axios';
+import {Alert } from 'react-native';
 
 // Define the base URL for your API
 const API_URL = 'https://fakeapi.com/api/auth';
@@ -38,6 +39,7 @@ async function makeAuthenticatedRequest(token) {
 // Function to handle login
 export const loginUser = async (loginData: LoginData) => {
   try {
+    Alert.alert('Login Successful');
     const response = await axios.post(`${API_URL}/login`, loginData);
     return response.data; // Return user data or token
   } catch (error) {

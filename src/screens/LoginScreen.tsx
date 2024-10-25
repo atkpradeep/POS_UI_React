@@ -28,12 +28,15 @@ export default function LoginScreen({ setUserToken }: { setUserToken: (token: st
       return;
     }
     try {
-      const loginData = { username, password };
-      const result = await loginUser(loginData); // Call login API
-      // Save user token to AsyncStorage and update state
-      await AsyncStorage.setItem('userToken', result.token);
-      setUserToken(result.token);
+      setUserToken('token');
       Alert.alert('Login Successful');
+      navigation.replace('MainTab');
+      // const loginData = { username, password };
+      // const result = await loginUser(loginData); // Call login API
+      // // Save user token to AsyncStorage and update state
+      // await AsyncStorage.setItem('userToken', result.token);
+      // setUserToken(result.token);
+      // Alert.alert('Login Successful');
     } catch (error) {
       setErrorMessage('Invalid login credentials');
     }

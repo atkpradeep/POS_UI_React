@@ -44,7 +44,7 @@ export default function App() {
   return (
     <NavigationContainer>
       {userToken ? (
-        <MainTab signOut={signOut} />  // Pass signOut function to MainTab
+       <MainTab/> 
       ) : (
         <AuthStack setUserToken={setUserToken} />  // Pass setUserToken to AuthStack
       )}

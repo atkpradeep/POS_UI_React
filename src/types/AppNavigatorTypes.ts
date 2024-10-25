@@ -5,6 +5,8 @@ export type RootStackParamList = {
   Login: undefined;
   Register: undefined;
   ResetPassword:undefined;
+  Products:undefined;
+  Home:undefined;
   // Add any other screens here
 };
 

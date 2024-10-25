@@ -3,19 +3,30 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Button, View, Text } from 'react-native';
 
 import HomeScreen from '@/src/screens/HomeScreen';
-import ProfileScreen from '@/src/screens/ProfileScreen';
-import SettingsScreen from '@/src/screens/SettingsScreen';
+import ProductsScreen from '@/src/screens/ProductsScreen';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const Tab = createBottomTabNavigator();
 
-
-export default function MainTab({ signOut }: { signOut: () => void }) {
+export default function MainTab() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home">
-        {() => <HomeScreen signOut={signOut} />}
-      </Tab.Screen>
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+    <Tab.Navigator screenOptions={({ route }) => ({
+      tabBarIcon: ({ color, size }) => {
+        let iconName;
+
+        if (route.name === 'Home') {
+          iconName = 'home';
+        } else if (route.name === 'Products') {
+          iconName = 'list';
+        }
+        return <FontAwesome name={iconName} size={size} color={color} />;
+      },
+      tabBarActiveTintColor: 'tomato',
+      tabBarInactiveTintColor: 'gray',
+      headerShown: false,
+    })}>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Products" component={ProductsScreen} />
     </Tab.Navigator>
   );
 }
